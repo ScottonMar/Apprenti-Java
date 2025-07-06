@@ -1,0 +1,7 @@
+Category|ShelfNumber|Position|YearPublished|Author|ISBN
+Science Fiction|1|1|2020|Isaac Asimov|978-0451524935
+Science Fiction|2|1|2021|Philip K. Dick|978-0394800424
+Science Fiction|1|2|2019|Arthur C. Clarke|978-0345347958
+Fantasy|10|15|1997|J.K. Rowling|978-0747532743
+Mystery|5|7|1934|Agatha Christie|978-0062073501
+Fiction|8|10|2010|George Orwell|978-0451524935

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="bdfddb41-3058-4473-9d1c-c01316db5145" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../CodeAlongOperators/CodeAlongOperators.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Code_Along/.idea/Code_Along.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Code_Along/out/production/Code_Along/.idea/Code_Along.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ExerciseOperators/ExerciseOperators.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Exercise_Data_types/Exercise_Data_types.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/app/LibraryApp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/controller/LibraryController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/exception/BookNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/exception/DuplicateISBNException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/Book.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/service/LibraryRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/service/LibraryService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/maven/archetype.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/archetype-resources/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/archetype-resources/src/main/java/App.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/archetype-resources/src/test/java/AppTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/books.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/service/LibraryRepositoryTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/service/LibraryServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ShoppingCart/.idea/ShoppingCart.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ShoppingCart/out/production/ShoppingCart/.idea/ShoppingCart.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Storage_Locker/Storage_Locker.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../data-types/data-types.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Shopping-Cart/src/main/java/com/shoppingcart/app/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Shopping-Cart/src/main/java/com/shoppingcart/app/Main.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="package-info" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 7
+}]]></component>
+  <component name="ProjectId" id="2zVpjhI0GLFWT9jgTEXkcbvfVBj" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.LibraryApp.executor": "Run",
+    "Application.Main.executor": "Run",
+    "JUnit.BookRepositoryTest.executor": "Run",
+    "JUnit.LibraryRepositoryTest.executor": "Run",
+    "JUnit.LibraryRepositoryTest.testAddBook.executor": "Run",
+    "JUnit.LibraryRepositoryTest.testBookNotFoundOnRemove.executor": "Run",
+    "JUnit.LibraryRepositoryTest.testDuplicateISBN.executor": "Run",
+    "JUnit.LibraryRepositoryTest.testRemoveBook.executor": "Run",
+    "JUnit.LibraryServiceTest.executor": "Run",
+    "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main"
+  }
+}]]></component>
+  <component name="RunManager" selected="Application.LibraryApp">
+    <configuration name="LibraryApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="app.LibraryApp" />
+      <module name="Library-Management-System" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="app.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LibraryRepositoryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Library-Management-System" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="service" />
+      <option name="MAIN_CLASS_NAME" value="service.LibraryRepositoryTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LibraryRepositoryTest.testBookNotFoundOnRemove" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Library-Management-System" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="service" />
+      <option name="MAIN_CLASS_NAME" value="service.LibraryRepositoryTest" />
+      <option name="METHOD_NAME" value="testBookNotFoundOnRemove" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LibraryRepositoryTest.testRemoveBook" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Library-Management-System" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="service" />
+      <option name="MAIN_CLASS_NAME" value="service.LibraryRepositoryTest" />
+      <option name="METHOD_NAME" value="testRemoveBook" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LibraryServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Library-Management-System" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="service" />
+      <option name="MAIN_CLASS_NAME" value="service.LibraryServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="Library Management System" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="Library Management System" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.LibraryApp" />
+        <item itemvalue="JUnit.LibraryRepositoryTest" />
+        <item itemvalue="JUnit.LibraryServiceTest" />
+        <item itemvalue="JUnit.LibraryRepositoryTest.testBookNotFoundOnRemove" />
+        <item itemvalue="JUnit.LibraryRepositoryTest.testRemoveBook" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bdfddb41-3058-4473-9d1c-c01316db5145" name="Changes" comment="" />
+      <created>1751826233152</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1751826233152</updated>
+    </task>
+    <servers />
+  </component>
+</project>
