@@ -1,46 +1,67 @@
 package com.inventory.data;
 
-import com.inventory.model.PerishableProduct;
 import com.inventory.model.Product;
+import com.inventory.model.PerishableProduct;
 import org.junit.jupiter.api.*;
 
 import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class InventoryRepositoryTest {
 
-    private static final String FILE_PATH = "inventory.txt";
-    private List<Product> products;
-    private InventoryRepository repository;
+    private InventoryRepository repo;
+    private final String testFileName = "inventory.txt"; // default file used
 
     @BeforeEach
-    void setup() {
-        products = new ArrayList<>();
-        repository = new InventoryRepository(products);
-    }
-
-    @Test
-    void testSaveAndLoadProducts() {
-        Product p1 = new Product("T1", "Paper", 100, 0.99);
-        Product p2 = new PerishableProduct("T2", "Juice", 20, 2.5, LocalDate.of(2025, 10, 1));
-        products.add(p1);
-        products.add(p2);
-
-        repository.saveToFile();
-        products.clear();
-        assertEquals(0, products.size());
-
-        repository.loadFromFile();
-        assertEquals(2, products.size());
+    void setUp() {
+        repo = new InventoryRepository();
     }
 
     @AfterEach
     void tearDown() {
-        File file = new File(FILE_PATH);
+        File file = new File(testFileName);
+        if (file.exists()) {
+            file.delete();
+        }
+    }
+
+    @Test
+    void testSaveAndLoadNormalProducts() throws IOException {
+        List<Product> products = List.of(
+                new Product("001", "Chair", 5, 45.0),
+                new Product("002", "Table", 3, 89.99)
+        );
+        repo.saveInventory(products);
+
+        List<Product> loaded = repo.loadInventory();
+        assertEquals(2, loaded.size());
+        assertEquals("Chair", loaded.get(0).getProductName());
+    }
+
+    @Test
+    void testSaveAndLoadPerishableProducts() throws IOException {
+        List<Product> products = List.of(
+                new PerishableProduct("003", "Milk", 10, 2.50, LocalDate.of(2025, 12, 31))
+        );
+        repo.saveInventory(products);
+
+        List<Product> loaded = repo.loadInventory();
+        assertEquals(1, loaded.size());
+        assertTrue(loaded.get(0) instanceof PerishableProduct);
+        assertEquals("Milk", loaded.get(0).getProductName());
+    }
+
+    @Test
+    void testLoadFromNonexistentFileReturnsEmptyList() throws IOException {
+        File file = new File(testFileName);
         if (file.exists()) file.delete();
+
+        List<Product> loaded = repo.loadInventory();
+        assertNotNull(loaded);
+        assertTrue(loaded.isEmpty());
     }
 }

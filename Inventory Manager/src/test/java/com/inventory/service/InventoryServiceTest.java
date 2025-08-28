@@ -1,70 +1,81 @@
 package com.inventory.service;
 
-import com.inventory.model.PerishableProduct;
 import com.inventory.model.Product;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
+import java.util.Collection;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class InventoryServiceTest {
 
-    private InventoryService inventory;
+    private InventoryService service;
 
     @BeforeEach
     void setUp() {
-        inventory = new InventoryService();
+        service = new InventoryService();
+        service.addProduct(new Product("101", "Laptop", 10, 999.99));
     }
 
     @Test
-    void testAddAndSearchProduct() {
-        Product p = new Product("A1", "Chair", 3, 49.99);
-        assertTrue(inventory.addProduct(p));
-
-        Product found = inventory.searchByIdOrName("A1");
-        assertNotNull(found);
-        assertEquals("Chair", found.getProductName());
+    void testAddProduct() {
+        boolean result = service.addProduct(new Product("102", "Mouse", 20, 25.0));
+        assertTrue(result);
     }
 
     @Test
-    void testPreventDuplicateProduct() {
-        Product p1 = new Product("B1", "Desk", 5, 89.99);
-        Product p2 = new Product("B1", "Table", 2, 99.99);
+    void testAddDuplicateProductFails() {
+        boolean result = service.addProduct(new Product("101", "Laptop", 5, 850.0));
+        assertFalse(result);
+    }
 
-        assertTrue(inventory.addProduct(p1));
-        assertFalse(inventory.addProduct(p2)); // Duplicate ID
+    @Test
+    void testGetAllProducts() {
+        Collection<Product> products = service.getAllProducts();
+        assertEquals(1, products.size());
+    }
+
+    @Test
+    void testSearchProductById() {
+        Product product = service.searchProduct("101");
+        assertNotNull(product);
+        assertEquals("Laptop", product.getProductName());
+    }
+
+    @Test
+    void testSearchProductByName() {
+        Product product = service.searchProduct("Laptop");
+        assertNotNull(product);
+        assertEquals("101", product.getProductId());
     }
 
     @Test
     void testUpdateProduct() {
-        Product p = new Product("C1", "Lamp", 10, 15.0);
-        inventory.addProduct(p);
-
-        boolean updated = inventory.updateProduct("C1", 20, 18.5);
+        boolean updated = service.updateProduct("101", 5, 899.99);
         assertTrue(updated);
 
-        Product updatedProduct = inventory.searchByIdOrName("C1");
-        assertEquals(20, updatedProduct.getQuantity());
-        assertEquals(18.5, updatedProduct.getPrice());
+        Product product = service.searchProduct("101");
+        assertEquals(5, product.getQuantity());
+        assertEquals(899.99, product.getPrice());
+    }
+
+    @Test
+    void testUpdateProductInvalidIdFails() {
+        boolean updated = service.updateProduct("999", 5, 100.0);
+        assertFalse(updated);
     }
 
     @Test
     void testDeleteProduct() {
-        Product p = new Product("D1", "Fan", 6, 25.0);
-        inventory.addProduct(p);
-        assertTrue(inventory.deleteProduct("D1"));
-        assertNull(inventory.searchByIdOrName("D1"));
+        boolean deleted = service.deleteProduct("101");
+        assertTrue(deleted);
+        assertNull(service.searchProduct("101"));
     }
 
     @Test
-    void testAddPerishableProduct() {
-        PerishableProduct pp = new PerishableProduct("PX", "Eggs", 30, 4.5, LocalDate.now().plusDays(10));
-        assertTrue(inventory.addProduct(pp));
-
-        Product found = inventory.searchByIdOrName("PX");
-        assertNotNull(found);
-        assertInstanceOf(PerishableProduct.class, found);
+    void testDeleteProductNotFound() {
+        boolean deleted = service.deleteProduct("999");
+        assertFalse(deleted);
     }
 }

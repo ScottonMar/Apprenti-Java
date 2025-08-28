@@ -1,7 +1,6 @@
 package com.airport.data;
 
 import com.airport.domain.model.*;
-import com.airport.domain.loyalty.*;
 import com.airport.domain.reservation.ReservationSystem;
 
 import java.io.*;
@@ -11,95 +10,75 @@ import java.util.*;
 
 public class CSVUtil {
 
-    // Save reservations and loyalty info to CSV
+    // Save reservations to a CSV file
     public static void saveReservationsToCSV(String filePath, ReservationSystem reservationSystem, List<Flight> flights) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             for (Flight flight : flights) {
-                String flightNumber = flight.getFlightNumber();
-                List<Passenger> passengers = reservationSystem.getPassengersForFlight(flightNumber);
-                for (Passenger p : passengers) {
-                    String loyalty = "None";
-                    BigDecimal price = flight.getTicketPrice();
-
-                    // Determine loyalty type (optional)
-                    BigDecimal discounted = reservationSystem.getDiscountedPrice(p.getPassportNumber(), price);
-                    if (discounted.compareTo(price) < 0) {
-                        loyalty = "VIP";
-                    } else {
-                        loyalty = "Regular";
+                List<Passenger> passengers = reservationSystem.getPassengersForFlight(flight.getFlightNumber());
+                if (passengers != null) {
+                    for (Passenger p : passengers) {
+                        writer.write(String.format("%s,%s,%s,%s,%s,%s,%s",
+                                flight.getFlightNumber(),
+                                flight.getDepartureDate(),
+                                flight.getTicketPrice(),
+                                p.getName(),
+                                p.getPassportNumber(),
+                                flight.getAircraft().getModel(),
+                                flight.getAircraft() instanceof CommercialAircraft ? "Commercial" : "PrivateJet"
+                        ));
+                        writer.newLine();
                     }
-
-                    String line = String.join(",",
-                            flight.getFlightNumber(),
-                            flight.getDepartureDate().toString(),
-                            flight.getTicketPrice().toString(),
-                            p.getName(),
-                            p.getPassportNumber(),
-                            flight.getAircraft().getModel(),
-                            (flight.getAircraft() instanceof CommercialAircraft ? "Commercial" : "PrivateJet"),
-                            loyalty
-                    );
-                    writer.write(line);
-                    writer.newLine();
                 }
             }
+            System.out.println("Reservations saved to CSV.");
         } catch (IOException e) {
-            System.err.println("Error writing to CSV: " + filePath);
-            e.printStackTrace();
+            System.err.println("Error writing to CSV: " + e.getMessage());
         }
     }
 
-    // Load reservations and loyalty info from CSV
-    public static ReservationSystem loadReservationsFromCSV(String filePath) {
-        ReservationSystem reservationSystem = new ReservationSystem();
-
+    // Load reservations from a CSV file
+    public static void loadReservationsFromCSV(ReservationSystem reservationSystem, String filePath) {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
-            Map<String, Flight> flightCache = new HashMap<>();
+            Map<String, Flight> flightMap = new HashMap<>();
 
             while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(",", -1);
-                if (parts.length < 8) continue; // Ensure all columns exist
+                String[] parts = line.split(",");
+                if (parts.length != 7) continue;
 
                 String flightNumber = parts[0];
-                LocalDate departureDate = LocalDate.parse(parts[1]);
-                BigDecimal ticketPrice = new BigDecimal(parts[2]);
+                LocalDate date = LocalDate.parse(parts[1]);
+                BigDecimal price = new BigDecimal(parts[2]);
                 String passengerName = parts[3];
-                String passportNumber = parts[4];
-                String aircraftModel = parts[5];
-                String aircraftType = parts[6];
-                String loyaltyType = parts[7];
+                String passport = parts[4];
+                String model = parts[5];
+                String type = parts[6];
 
                 Aircraft aircraft;
-                if (aircraftType.equalsIgnoreCase("Commercial")) {
-                    aircraft = new CommercialAircraft(aircraftModel, 150, 26000, "Unknown Airline");
+                if (type.equalsIgnoreCase("Commercial")) {
+                    aircraft = new CommercialAircraft(model, 180, 26000, "Loaded Airline");
                 } else {
-                    aircraft = new PrivateJet(aircraftModel, 12, 15000, true, 900);
+                    aircraft = new PrivateJet(model, 12, 15000, true, 800);
                 }
 
-                // Use cached Flight object if available
-                Flight flight = flightCache.get(flightNumber);
-                if (flight == null) {
-                    flight = new Flight(flightNumber, departureDate, ticketPrice, aircraft);
-                    flightCache.put(flightNumber, flight);
+                Flight flight;
+                if (flightMap.containsKey(flightNumber)) {
+                    flight = flightMap.get(flightNumber);
+                } else {
+                    flight = new Flight(flightNumber, date, price, aircraft);
+                    reservationSystem.addFlight(flight);
+                    flightMap.put(flightNumber, flight);
                 }
 
-                Passenger passenger = new Passenger(passengerName, passportNumber);
-                reservationSystem.addReservation(flightNumber, passenger);
-
-                // Set loyalty program based on column
-                if (loyaltyType.equalsIgnoreCase("VIP")) {
-                    reservationSystem.setLoyaltyProgram(passportNumber, new VIPPassenger());
-                } else if (loyaltyType.equalsIgnoreCase("Regular")) {
-                    reservationSystem.setLoyaltyProgram(passportNumber, new RegularPassenger());
+                if (!passengerName.equalsIgnoreCase("None")) {
+                    Passenger passenger = new Passenger(passengerName, passport);
+                    reservationSystem.addReservation(flightNumber, passenger);
                 }
             }
 
+            System.out.println("Reservations loaded from CSV.");
         } catch (IOException e) {
-            System.err.println("Error loading reservations from CSV: " + filePath);
-            e.printStackTrace();
+            System.err.println("Error loading reservations from CSV: " + e.getMessage());
         }
-
-        return reservationSystem;
     }
 }

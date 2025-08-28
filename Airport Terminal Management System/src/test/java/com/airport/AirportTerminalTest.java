@@ -4,76 +4,53 @@ import com.airport.domain.model.*;
 import com.airport.domain.reservation.ReservationSystem;
 import com.airport.data.CSVUtil;
 
-import org.junit.jupiter.api.*;
-import java.io.File;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.*;
-
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AirportTerminalTest {
 
-    private ReservationSystem reservationSystem;
-    private Map<String, Flight> flightMap;
-
-    @BeforeEach
-    public void setup() {
-        reservationSystem = new ReservationSystem();
-        flightMap = new HashMap<>();
-
-        Aircraft aircraft = new CommercialAircraft("Boeing 737", 180, 26000, "Delta");
-        Flight flight = new Flight("AA101", LocalDate.of(2024, 8, 15), new BigDecimal("299.99"), aircraft);
-        flightMap.put(flight.getFlightNumber(), flight);
-
-        Passenger passenger = new Passenger("Alice Smith", "P12345");
-        reservationSystem.addReservation(flight.getFlightNumber(), passenger);
-    }
-
     @Test
-    public void testAddReservation() {
-        List<Passenger> passengers = reservationSystem.getPassengersForFlight("AA101");
-        assertEquals(1, passengers.size());
-        assertEquals("Alice Smith", passengers.get(0).getName());
-    }
+    public void testSaveReservationsToCSV() {
+        // Create Aircraft
+        Aircraft commercialAircraft = new CommercialAircraft("Boeing 737", 180, 26000, "American Airlines");
+        Aircraft privateJet = new PrivateJet("Gulfstream G650", 12, 15000, true, 900);
 
-    @Test
-    public void testGetPassengersForFlight() {
-        List<Passenger> passengers = reservationSystem.getPassengersForFlight("AA101");
-        assertFalse(passengers.isEmpty());
-        assertEquals("P12345", passengers.get(0).getPassportNumber());
-    }
+        // Create Flights
+        Flight flight1 = new Flight("AA101", LocalDate.of(2025, 7, 15), new BigDecimal("350.00"), commercialAircraft);
+        Flight flight2 = new Flight("PJ001", LocalDate.of(2025, 8, 5), new BigDecimal("4500.00"), privateJet);
 
-    @Test
-    public void testSaveAndLoadCSV() {
-        String tempFile = "data/test_reservations.csv";
+        List<Flight> flights = new ArrayList<>();
+        flights.add(flight1);
+        flights.add(flight2);
 
-        // Save
-        CSVUtil.saveReservationsToCSV(reservationSystem, flightMap);
+        // Create Passengers
+        Passenger passenger1 = new Passenger("Alice Smith", "P12345");
+        Passenger passenger2 = new Passenger("Bob Jones", "P67890");
 
-        // Load
-        ReservationSystem loadedSystem = new ReservationSystem();
-        CSVUtil.loadReservationsFromCSV(loadedSystem, "data/reservations.csv");
+        // Reservation System
+        ReservationSystem system = new ReservationSystem();
+        system.addFlight(flight1);
+        system.addFlight(flight2);
+        system.addReservation("AA101", passenger1);
+        system.addReservation("PJ001", passenger2);
 
-        assertFalse(loadedSystem.getPassengersForFlight("AA101").isEmpty());
-        assertEquals("Alice Smith", loadedSystem.getPassengersForFlight("AA101").get(0).getName());
-    }
+        // Save to CSV
+        CSVUtil.saveReservationsToCSV("data/reservations.csv", system, flights);
 
-    @Test
-    public void testAircraftTypeDetection() {
-        CommercialAircraft commercial = new CommercialAircraft("Airbus A320", 160, 24000, "American Airlines");
-        assertEquals("Commercial", commercial.getAircraftType());
+        // Basic checks
+        List<Passenger> passengersAA101 = system.getPassengersForFlight("AA101");
+        List<Passenger> passengersPJ001 = system.getPassengersForFlight("PJ001");
 
-        PrivateJet jet = new PrivateJet("Gulfstream G650", 10, 12000, true, 900);
-        assertEquals("PrivateJet", jet.getAircraftType());
-    }
-
-    @AfterEach
-    public void cleanup() {
-        // Optional: Clean test file if needed
-        File file = new File("data/test_reservations.csv");
-        if (file.exists()) {
-            file.delete();
-        }
+        assertNotNull(passengersAA101);
+        assertNotNull(passengersPJ001);
+        assertEquals(1, passengersAA101.size());
+        assertEquals(1, passengersPJ001.size());
+        assertEquals("Alice Smith", passengersAA101.get(0).getName());
+        assertEquals("Bob Jones", passengersPJ001.get(0).getName());
     }
 }

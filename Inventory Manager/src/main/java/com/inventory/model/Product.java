@@ -1,53 +1,50 @@
 package com.inventory.model;
 
-public class Product {
-    private String productID;
-    private String productName;
-    private int quantity;
-    private double price;
+import java.util.Objects;
 
-    public Product(String productID, String productName, int quantity, double price) {
-        this.productID = productID;
+public class Product {
+    protected String productId;
+    protected String productName;
+    protected int quantity;
+    protected double price;
+
+    public Product(String productId, String productName, int quantity, double price) {
+        this.productId = productId;
         this.productName = productName;
         this.quantity = quantity;
         this.price = price;
     }
 
-    public String getProductID() {
-        return productID;
+    public String getProductId() { return productId; }
+    public String getProductName() { return productName; }
+    public int getQuantity() { return quantity; }
+    public double getPrice() { return price; }
+
+    public void setQuantity(int quantity) { this.quantity = quantity; }
+    public void setPrice(double price) { this.price = price; }
+
+    public void increaseStock(int amount) { this.quantity += amount; }
+    public void decreaseStock(int amount) { this.quantity -= amount; }
+
+    @Override
+    public String toString() {
+        return String.format("%s | %s | %d | $%.2f", productId, productName, quantity, price);
     }
 
-    public String getProductName() {
-        return productName;
+    public String toFileString() {
+        return String.format("N,%s,%s,%d,%.2f", productId, productName, quantity, price);
     }
 
-    public int getQuantity() {
-        return quantity;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Product)) return false;
+        Product product = (Product) o;
+        return Objects.equals(productId, product.productId);
     }
 
-    public double getPrice() {
-        return price;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public void displayInfo() {
-        System.out.printf("ID: %s | Name: %s | Quantity: %d | Price: $%.2f%n",
-                productID, productName, quantity, price);
-    }
-
-    public String toCSV() {
-        return String.format("%s,%s,%d,%.2f", productID, productName, quantity, price);
-    }
-
-    public static Product fromCSV(String line) {
-        String[] parts = line.split(",");
-        return new Product(parts[0], parts[1], Integer.parseInt(parts[2]), Double.parseDouble(parts[3]));
+    @Override
+    public int hashCode() {
+        return Objects.hash(productId);
     }
 }
