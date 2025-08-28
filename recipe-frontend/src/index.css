@@ -1,0 +1,53 @@
+/* Base page styling */
+body {
+  font-family: system-ui, sans-serif;
+  margin: 0;
+  background: #fafafa;
+  color: #222;
+}
+
+/* Links */
+a { color: #0077cc; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Layout container */
+.container {
+  max-width: 900px;
+  margin: 24px auto;
+  padding: 0 16px;
+}
+
+/* Headings */
+h2 { margin: 0 0 12px; font-size: 1.8rem; color: #333; }
+h3 { margin: 24px 0 8px; font-size: 1.3rem; border-bottom: 2px solid #eee; padding-bottom: 4px; }
+
+/* Buttons */
+button { background:#0077cc; color:#fff; border:0; border-radius:4px; padding:6px 12px; cursor:pointer; }
+button:hover:not(:disabled) { background:#005fa3; }
+button:disabled { opacity:.6; cursor: default; }
+
+/* Danger buttons */
+button.danger { background:#f55; border:1px solid #c33; }
+button.danger:hover:not(:disabled) { background:#d22; }
+
+/* Form elements */
+input, textarea { border:1px solid #ccc; border-radius:4px; padding:6px; font-size:.95rem; }
+
+/* Recipe detail image */
+.recipe-detail img { max-width:100%; border-radius:6px; margin-bottom:12px; }
+
+.img-preview {
+  max-width: 320px;
+  max-height: 240px;
+  border-radius: 6px;
+  border: 1px solid #eee;
+  display: block;
+}
+.img-preview-wrap {
+  margin-top: 8px;
+}
+.img-preview-note {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 4px;
+}
