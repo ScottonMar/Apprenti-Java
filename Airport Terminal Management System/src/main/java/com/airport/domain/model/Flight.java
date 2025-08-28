@@ -4,10 +4,10 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class Flight {
-    private String flightNumber;
-    private LocalDate departureDate;
-    private BigDecimal ticketPrice;
-    private Aircraft aircraft;
+    private final String flightNumber;
+    private final LocalDate departureDate;
+    private final BigDecimal ticketPrice;
+    private final Aircraft aircraft;
 
     public Flight(String flightNumber, LocalDate departureDate, BigDecimal ticketPrice, Aircraft aircraft) {
         this.flightNumber = flightNumber;
@@ -30,10 +30,5 @@ public class Flight {
 
     public Aircraft getAircraft() {
         return aircraft;
-    }
-
-    @Override
-    public String toString() {
-        return flightNumber + " on " + departureDate + ", $" + ticketPrice + ", Aircraft: " + aircraft;
     }
 }

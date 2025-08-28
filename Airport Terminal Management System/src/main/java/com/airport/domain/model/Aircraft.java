@@ -1,9 +1,9 @@
 package com.airport.domain.model;
 
 public abstract class Aircraft {
-    private String model;
-    private int capacity;
-    private double fuelCapacity;
+    private final String model;
+    private final int capacity;
+    private final double fuelCapacity;
 
     public Aircraft(String model, int capacity, double fuelCapacity) {
         this.model = model;
@@ -21,12 +21,5 @@ public abstract class Aircraft {
 
     public double getFuelCapacity() {
         return fuelCapacity;
-    }
-
-    public abstract String getAircraftType();
-
-    @Override
-    public String toString() {
-        return model + " (" + getAircraftType() + ")";
     }
 }

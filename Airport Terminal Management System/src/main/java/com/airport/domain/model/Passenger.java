@@ -1,8 +1,8 @@
 package com.airport.domain.model;
 
 public class Passenger {
-    private String name;
-    private String passportNumber;
+    private final String name;
+    private final String passportNumber;
 
     public Passenger(String name, String passportNumber) {
         this.name = name;
