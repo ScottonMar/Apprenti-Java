@@ -5,32 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bdfddb41-3058-4473-9d1c-c01316db5145" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../CodeAlongOperators/CodeAlongOperators.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Code_Along/.idea/Code_Along.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Code_Along/out/production/Code_Along/.idea/Code_Along.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ExerciseOperators/ExerciseOperators.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Exercise_Data_types/Exercise_Data_types.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/LibraryApp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/controller/LibraryController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/exception/BookNotFoundException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/exception/DuplicateISBNException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/model/Book.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/service/LibraryRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/service/LibraryService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/maven/archetype.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/archetype-resources/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/archetype-resources/src/main/java/App.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/archetype-resources/src/test/java/AppTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/books.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/service/LibraryRepositoryTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/service/LibraryServiceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ShoppingCart/.idea/ShoppingCart.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ShoppingCart/out/production/ShoppingCart/.idea/ShoppingCart.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Storage_Locker/Storage_Locker.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../data-types/data-types.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Shopping-Cart/src/main/java/com/shoppingcart/app/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Shopping-Cart/src/main/java/com/shoppingcart/app/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -49,9 +24,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 7
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="2zVpjhI0GLFWT9jgTEXkcbvfVBj" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -71,6 +46,7 @@
     "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main"
   }
 }]]></component>
