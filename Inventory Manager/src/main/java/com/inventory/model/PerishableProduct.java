@@ -5,8 +5,8 @@ import java.time.LocalDate;
 public class PerishableProduct extends Product {
     private LocalDate expiryDate;
 
-    public PerishableProduct(String productID, String productName, int quantity, double price, LocalDate expiryDate) {
-        super(productID, productName, quantity, price);
+    public PerishableProduct(String productId, String productName, int quantity, double price, LocalDate expiryDate) {
+        super(productId, productName, quantity, price);
         this.expiryDate = expiryDate;
     }
 
@@ -14,21 +14,17 @@ public class PerishableProduct extends Product {
         return expiryDate;
     }
 
-    @Override
-    public void displayInfo() {
-        super.displayInfo();
-        System.out.println("   Expiry Date: " + expiryDate);
+    public void setExpiryDate(LocalDate expiryDate) {
+        this.expiryDate = expiryDate;
     }
 
     @Override
-    public String toCSV() {
-        return super.toCSV() + "," + expiryDate;
+    public String toString() {
+        return super.toString() + " | Expires: " + expiryDate;
     }
 
-    public static PerishableProduct fromCSV(String line) {
-        String[] parts = line.split(",");
-        return new PerishableProduct(parts[0], parts[1],
-                Integer.parseInt(parts[2]), Double.parseDouble(parts[3]),
-                LocalDate.parse(parts[4]));
+    @Override
+    public String toFileString() {
+        return String.format("P,%s,%s,%d,%.2f,%s", productId, productName, quantity, price, expiryDate);
     }
 }

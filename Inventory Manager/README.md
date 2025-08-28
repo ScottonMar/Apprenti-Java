@@ -1,12 +1,12 @@
 # **Inventory Manager Console Application**
 
-A Java console-based inventory management system that allows users to manage product data with features like adding, updating, deleting, saving, and loading inventory.
+A simple Java console-based inventory management system. This application allows users to perform essential inventory operations such as adding, viewing, updating, deleting, searching, saving to file, and loading from file.
 
 ## **Features**
 
 * Add new products (including perishable items with expiry dates)
 
-* View all inventory
+* View current inventory
 
 * Search products by ID or name
 
@@ -92,42 +92,3 @@ Enter Expiry Date (yyyy-MM-dd): 2025-12-31
 
 Product added successfully!
 
-### **===== Inventory Manager =====**
-
-Enter your choice: 2
-
-===== Inventory List =====
-
-Product ID: 002
-
-Name: Milk
-
-Quantity: 10
-
-Price: $3.49
-
-Expiry Date: 2025-12-31
-
-### **===== Inventory Manager =====**
-
-Enter your choice: 3
-
-Enter Product ID or Name: Milk
-
-Product Found:
-
-Product ID: 002
-
-Name: Milk
-
-Quantity: 10
-
-Price: $3.49
-
-Expiry Date: 2025-12-31
-
-### **===== Inventory Manager =====**
-
-Enter your choice: 8
-
-Are you sure you want to exit? (Y/N): Y
