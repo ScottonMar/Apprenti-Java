@@ -1,52 +1,54 @@
 package com.inventory.service;
 
-import com.inventory.data.InventoryRepository;
 import com.inventory.model.Product;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class InventoryService {
-    private final List<Product> products = new ArrayList<>();
-    private final InventoryRepository repository = new InventoryRepository(products);
+    private final Map<String, Product> inventory = new HashMap<>();
 
     public boolean addProduct(Product product) {
-        if (products.stream().anyMatch(p -> p.getProductID().equalsIgnoreCase(product.getProductID()))) {
-            return false;
-        }
-        products.add(product);
+        if (inventory.containsKey(product.getProductId())) return false;
+        inventory.put(product.getProductId(), product);
         return true;
     }
 
-    public List<Product> getAllProducts() {
-        return products;
+    public Collection<Product> getAllProducts() {
+        return inventory.values();
     }
 
-    public Product searchByIdOrName(String input) {
-        return products.stream()
-                .filter(p -> p.getProductID().equalsIgnoreCase(input) || p.getProductName().equalsIgnoreCase(input))
+    public Product searchProduct(String query) {
+        return inventory.values().stream()
+                .filter(p -> p.getProductId().equalsIgnoreCase(query) || p.getProductName().equalsIgnoreCase(query))
                 .findFirst().orElse(null);
     }
 
-    public boolean updateProduct(String productID, Integer newQuantity, Double newPrice) {
-        Product product = searchByIdOrName(productID);
-        if (product != null) {
-            if (newQuantity != null) product.setQuantity(newQuantity);
-            if (newPrice != null) product.setPrice(newPrice);
-            return true;
-        }
+    public boolean updateProduct(String id, Integer quantity, Double price) {
+        Product p = inventory.get(id);
+        if (p == null) return false;
+        if (quantity != null) p.setQuantity(quantity);
+        if (price != null) p.setPrice(price);
+        return true;
+    }
+
+    public boolean deleteProduct(String id) {
+        return inventory.remove(id) != null;
+    }
+
+    public Map<String, Product> getInventoryMap() {
+        return inventory;
+    }
+
+    public void loadFromMap(Map<String, Product> map) {
+        inventory.clear();
+        inventory.putAll(map);
+    }
+
+    public boolean productExists(String id) {
         return false;
     }
 
-    public boolean deleteProduct(String productID) {
-        return products.removeIf(p -> p.getProductID().equalsIgnoreCase(productID));
-    }
+    public void loadProducts(List<Product> products) {
 
-    public void saveInventory() {
-        repository.saveToFile();
-    }
-
-    public void loadInventory() {
-        repository.loadFromFile();
     }
 }

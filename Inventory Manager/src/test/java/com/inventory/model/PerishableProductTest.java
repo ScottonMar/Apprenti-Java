@@ -11,27 +11,18 @@ class PerishableProductTest {
     @Test
     void testPerishableProductCreation() {
         LocalDate expiry = LocalDate.of(2025, 12, 31);
-        PerishableProduct pp = new PerishableProduct("PX", "Yogurt", 20, 2.99, expiry);
+        PerishableProduct pp = new PerishableProduct("010", "Milk", 30, 2.50, expiry);
 
-        assertEquals("PX", pp.getProductID());
-        assertEquals("Yogurt", pp.getProductName());
-        assertEquals(20, pp.getQuantity());
-        assertEquals(2.99, pp.getPrice());
+        assertEquals("010", pp.getProductId());
+        assertEquals("Milk", pp.getProductName());
+        assertEquals(30, pp.getQuantity());
+        assertEquals(2.50, pp.getPrice());
         assertEquals(expiry, pp.getExpiryDate());
     }
 
     @Test
-    void testCSVConversion() {
-        LocalDate expiry = LocalDate.of(2025, 11, 15);
-        PerishableProduct original = new PerishableProduct("PY", "Milk", 10, 3.25, expiry);
-
-        String csv = original.toCSV();
-        PerishableProduct copy = PerishableProduct.fromCSV(csv);
-
-        assertEquals(original.getProductID(), copy.getProductID());
-        assertEquals(original.getProductName(), copy.getProductName());
-        assertEquals(original.getQuantity(), copy.getQuantity());
-        assertEquals(original.getPrice(), copy.getPrice());
-        assertEquals(original.getExpiryDate(), copy.getExpiryDate());
+    void testToStringIncludesExpiry() {
+        PerishableProduct pp = new PerishableProduct("011", "Yogurt", 10, 3.25, LocalDate.of(2025, 10, 1));
+        assertTrue(pp.toString().contains("Expires"));
     }
 }
